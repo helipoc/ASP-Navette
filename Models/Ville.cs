@@ -3,7 +3,7 @@
 class Ville
 {
     public int? ID { get; set; }
-    public string? nom;
+    public string? nom { get; set; }
 
 
     public Ville() { }

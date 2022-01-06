@@ -1,16 +1,40 @@
-@if (ViewBag.Success != null)
-{
-    <div class="alert alert-success">
-    @ViewBag.Success
-</div>
-}
-
-
 <form action="" method="POST">
 
     <div class="mt-5 mb-3" style="width:50%;">
-        <label for="exampleInputEmail1" class="form-label">Modele</label>
-        <input type="text" class="form-control" aria-describedby="emailHelp" name="model">
+        <label for="autocar">Selectionner une de vos voiture : </label>
+
+        <select name="autocar">
+
+            @foreach (var v in ViewBag.voitures)
+            {
+                <option value="@v.ID">@v.modele</option>
+            }
+
+        </select>
+    </div>
+    <div class="mb-3" style="width:50%;">
+        <label for="villedp">Ville depart : </label>
+
+        <select name="villedp">
+
+            @foreach (var v in ViewBag.cities)
+            {
+                <option value="@v.ID">@v.nom</option>
+            }
+
+        </select>
+    </div>
+    <div class="mb-3" style="width:50%;">
+        <label for="villeda">ville d arrete : </label>
+
+        <select name="villeda">
+
+            @foreach (var v in ViewBag.cities)
+            {
+                <option value="@v.ID">@v.nom</option>
+            }
+
+        </select>
     </div>
     <div class="mb-3" style="width:10%;">
         <label for="exampleInputEmail1" class="form-label">Capacité</label>

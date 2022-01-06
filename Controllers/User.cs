@@ -116,6 +116,7 @@ public class User : Controller
                 ViewBag.Success = "Login success";
                 HttpContext.Session.SetInt32("logged", 1);
                 HttpContext.Session.SetString("type", "user");
+                HttpContext.Session.SetString("login", user.login ?? "");
                 HttpContext.Session.SetString("name", user.nom ?? "");
                 return RedirectToAction("Index", "Home");
 
@@ -125,6 +126,7 @@ public class User : Controller
                 ViewBag.Success = "Login success";
                 HttpContext.Session.SetInt32("logged", 1);
                 HttpContext.Session.SetString("type", "soc");
+                HttpContext.Session.SetString("login", soc.login ?? "");
                 HttpContext.Session.SetString("name", soc.nom ?? "");
                 return RedirectToAction("Index", "Home");
             }
