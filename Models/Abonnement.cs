@@ -3,22 +3,24 @@ class Abonnement
     public int? ID { get; set; }
     public DateTime? d_Debut { get; set; }
     public DateTime? d_Fin { get; set; }
-    public DateTime? h_Dep { get; set; }
-    public DateTime? h_Arr { get; set; }
-    public double? prix { get; set; }
+    public string? h_Dep { get; set; }
+    public string? h_Arr { get; set; }
+    public decimal? prix { get; set; }
     public string? type { get; set; }
 
     public Ville? villeDep { get; set; }
     public Ville? villeDar { get; set; }
 
     public Autocar? voiture { get; set; }
+
+    public Societe? soc { get; set; }
     public List<Utilisateur>? adheres = null;
 
 
 
     public Abonnement() { }
-    public Abonnement(int d, DateTime dd, DateTime df, DateTime hd, DateTime ha, double pr,
-    string tp, Ville vd, Ville va, Autocar v)
+    public Abonnement(DateTime dd, DateTime df, string hd, string ha, decimal pr,
+    string tp, Ville vd, Ville va, Autocar v, Societe s)
     {
         ID = DataBase.getCtxDb().abonnements?.Count() + 1;
         d_Debut = dd;
@@ -31,6 +33,7 @@ class Abonnement
         villeDar = va;
         voiture = v;
         adheres = new List<Utilisateur>();
+        soc = s;
 
     }
 
