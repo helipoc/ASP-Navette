@@ -99,7 +99,7 @@ else
     @if (ViewBag.abos != null)
     {
 
-        <h3 class="mt-5 display-5"> Vos Abonnement </h3>
+        <h3 class="mt-5 display-5"> Vos Abonnements </h3>
 
         <table class="table table-striped table-hover">
     <thead>
@@ -108,6 +108,10 @@ else
             <th scope="col">Ville darrive </th>
             <th scope="col">Date debute</th>
             <th scope="col">Date fin</th>
+            <th scope="col">Prix Dh/mois</th>
+            <th scope="col">Nombre adheres</th>
+
+
         </tr>
     </thead>
     <tbody>
@@ -125,6 +129,13 @@ else
                         </td>
                         <td>
                             @a.d_Fin?.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @a.prix DH
+                        </td>
+
+                        <td>
+                            @(a.adheres?.ToArray().Length ?? 0)
                         </td>
                     </tr>
                 }

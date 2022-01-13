@@ -21,7 +21,9 @@
             <div class="container-fluid">
                 @if (ss?.GetString("name") != null)
                 {
-                    <a class="navbar-brand">Bonjour , @ss?.GetString("name")</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bonjour
+                        @ss?.GetString("name")</a>
+
                 }
                 else
                 {

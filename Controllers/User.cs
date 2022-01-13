@@ -136,4 +136,37 @@ public class User : Controller
     }
 
 
+    public IActionResult Abonner()
+    {
+        if (HttpContext.Session.GetString("type") != "user")
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        Utilisateur? User = DataBase.getCtxDb().utilisateurs?.Where(a => a.login == HttpContext.Session
+        .GetString("login")
+        ).FirstOrDefault();
+
+        Console.WriteLine(User!.mdp);
+        string? aboId = HttpContext.Request.RouteValues["id"]?.ToString();
+
+
+        if (aboId == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        Abonnement? a = DataBase.getCtxDb().abonnements?.Where(a => a.ID == Int32.Parse(aboId!)).FirstOrDefault();
+        if (a == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        a!.adheres?.Add(User);
+        DataBase.getCtxDb().SaveChanges();
+        TempData["Success"] = "Abonnez Avec success";
+        return RedirectToAction("Utilisateur", "Home");
+    }
+
+
 }

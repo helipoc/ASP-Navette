@@ -47,10 +47,10 @@ public class Soc : Controller
         ViewBag.Success = TempData["Success"];
 
         string soc = HttpContext.Session.GetString("login")!;
+        DataBase.getCtxDb().utilisateurs?.ToArray();
         ViewBag.voitures = DataBase.getCtxDb().autocars?.Where(v => v.owner!.login == HttpContext.Session.GetString("login")).ToArray();
         ViewBag.cities = DataBase.getCtxDb().villes?.ToArray();
         ViewBag.abos = DataBase.getCtxDb().abonnements?.Where(a => a.soc!.login == soc).ToArray();
-
         return View();
     }
 
