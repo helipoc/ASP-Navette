@@ -31,7 +31,6 @@ public class User : Controller
         string tel = Request.Form["telephone"];
         string type = Request.Form["type"];
 
-        Console.WriteLine(type);
         Utilisateur? u = DataBase.getCtxDb().utilisateurs?.Where(u => u.login == log).FirstOrDefault();
 
         if (u != null)
@@ -146,7 +145,6 @@ public class User : Controller
         .GetString("login")
         ).FirstOrDefault();
 
-        Console.WriteLine(User!.mdp);
         string? aboId = HttpContext.Request.RouteValues["id"]?.ToString();
 
 
@@ -162,10 +160,27 @@ public class User : Controller
         {
             return RedirectToAction("Index", "Home");
         }
-        a!.adheres?.Add(User);
+        a!.adheres?.Add(User!);
         DataBase.getCtxDb().SaveChanges();
         TempData["Success"] = "Abonnez Avec success";
         return RedirectToAction("Utilisateur", "Home");
+    }
+
+
+    public IActionResult Abonnements()
+    {
+        if (HttpContext.Session.GetString("type") != "user")
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        string? lo = HttpContext.Session.GetString("login");
+        DataBase.getCtxDb().villes?.ToArray();
+        ViewBag.abos = DataBase.getCtxDb().abonnements?
+        .Where(a => a.adheres!.Any(u => u.login == lo))
+        .ToArray();
+
+        return View();
     }
 
 

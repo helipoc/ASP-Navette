@@ -1,15 +1,7 @@
-@if (ViewBag.Success != null)
+@if (ViewBag.abos != null)
 {
 
-    <div class="alert alert-success">
-    @ViewBag.Success
-</div>
-}
 
-@if (ViewBag.abos.Length > 0)
-{
-
-    <h3 class="mt-5 display-5"> Les Abonnements Disponible : </h3>
 
     <table class="table table-striped table-hover">
     <thead>
@@ -52,7 +44,9 @@
                         @a.prix DH
                     </td>
                     <td>
-                        <a class="link-success" asp-controller="User" asp-action="Abonner" asp-route-id="@a.ID">Bonjour
+
+
+                        <a class="link-danger" asp-controller="User" asp-action="Deabonner" asp-route-id="@a.ID">Bonjour
                             S'abonner</a>
                     </td>
 
@@ -61,4 +55,11 @@
             }
         </tbody>
     </table>
+
+}
+else
+{
+    <div class="alert alert-warning">
+    Vous n'avaiz aucun Abonnement
+</div>
 }

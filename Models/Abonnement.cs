@@ -14,13 +14,12 @@ class Abonnement
     public Autocar? voiture { get; set; }
 
     public Societe? soc { get; set; }
-    public List<Utilisateur>? adheres = null;
+    public List<Utilisateur>? adheres { get; set; } = new();
 
 
 
     public Abonnement() { }
-    public Abonnement(DateTime dd, DateTime df, string hd, string ha, decimal pr,
-    string tp, Ville vd, Ville va, Autocar v, Societe s)
+    public Abonnement(DateTime dd, DateTime df, string hd, string ha, decimal pr, Ville vd, Ville va, Autocar v, Societe s)
     {
         ID = DataBase.getCtxDb().abonnements?.Count() + 1;
         d_Debut = dd;
@@ -28,7 +27,6 @@ class Abonnement
         h_Dep = hd;
         h_Arr = ha;
         prix = pr;
-        type = tp;
         villeDep = vd;
         villeDar = va;
         voiture = v;

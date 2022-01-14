@@ -39,8 +39,12 @@
                     @if (ss?.GetString("type") == "user")
                     {
 
-                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
 
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Abonnements">Vos
+                            Abonnements</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Abonnements">Proposer un
+                            Abonnement</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
                     }
                     else if (ss?.GetString("type") == "soc")
                     {

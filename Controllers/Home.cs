@@ -34,16 +34,16 @@ public class Home : Controller
     }
     public IActionResult Utilisateur()
     {
-        /*if (HttpContext.Session.GetInt32("logged") != 1)
+        if (HttpContext.Session.GetInt32("logged") != 1)
         {
             return RedirectToAction("Index", "Home");
         }
-*/
-        int? cU = HttpContext.Session.GetInt32("id");
+
+        string? lo = HttpContext.Session.GetString("login");
         DataBase.getCtxDb().villes?.ToArray();
-        DataBase.getCtxDb().utilisateurs?.ToArray();
-        ViewBag.abos = DataBase.getCtxDb().abonnements?.ToArray();
-        Console.WriteLine(ViewBag.abos[0]);
+        ViewBag.abos = DataBase.getCtxDb().abonnements?
+        .Where(a => a.adheres!.All(u => u.login != lo))
+        .ToArray();
         ViewBag.Success = TempData["Success"];
         return View();
     }
