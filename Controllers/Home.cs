@@ -46,7 +46,10 @@ public class Home : Controller
 
         string? lo = HttpContext.Session.GetString("login");
         ViewBag.cities = DataBase.getCtxDb().villes?.ToArray();
+        DataBase.getCtxDb().autocars?.ToArray();
         Utilisateur u = DataBase.getCtxDb().utilisateurs!.Where(x => x.login == lo).First();
+
+        DataBase.getCtxDb().abonnements?.ToArray();
         ViewBag.abos = DataBase.getCtxDb().abonnements?
         .Where(a => !u.adhere.Contains(a))
         .ToArray();

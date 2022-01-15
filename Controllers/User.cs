@@ -112,7 +112,6 @@ public class User : Controller
             else if (hashedMdp.Equals(user?.mdp))
             {
 
-                ViewBag.Success = "Login success";
                 HttpContext.Session.SetInt32("logged", 1);
                 HttpContext.Session.SetString("type", "user");
                 HttpContext.Session.SetString("login", user.login ?? "");
@@ -122,7 +121,6 @@ public class User : Controller
             }
             else if (hashedMdp.Equals(soc?.mdp))
             {
-                ViewBag.Success = "Login success";
                 HttpContext.Session.SetInt32("logged", 1);
                 HttpContext.Session.SetString("type", "soc");
                 HttpContext.Session.SetString("login", soc.login ?? "");
@@ -157,6 +155,10 @@ public class User : Controller
 
         Abonnement? a = DataBase.getCtxDb().abonnements?.Where(a => a.ID == Int32.Parse(aboId!)).FirstOrDefault();
         if (a == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        if (User!.adhere.Contains(a))
         {
             return RedirectToAction("Index", "Home");
         }

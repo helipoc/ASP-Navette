@@ -104,6 +104,7 @@ else
             <th scope="col">Date debute</th>
             <th scope="col">Date fin</th>
             <th scope="col">Prix Dh/mois</th>
+            <th scope="col">Nombre des adheres</th>
 
 
         </tr>
@@ -126,6 +127,9 @@ else
                         </td>
                         <td>
                             @a.prix DH
+                        </td>
+                        <td>
+                            @DataBase.getCtxDb().utilisateurs?.Count(u => u.adhere.Contains(a))
                         </td>
 
                     </tr>

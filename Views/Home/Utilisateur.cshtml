@@ -50,6 +50,7 @@
             <th scope="col">Date fin</th>
             <th scope="col">Heure Depart</th>
             <th scope="col">Heure Darrivé</th>
+            <th scope="col">Voiture</th>
             <th scope="col">Prix Dh/mois</th>
             <th scope="col">Action</th>
 
@@ -80,6 +81,9 @@
                         @a.h_Arr
                     </td>
                     <td>
+                        @a.voiture!.modele
+                    </td>
+                    <td>
                         @a.prix DH
                     </td>
                     <td>
@@ -96,7 +100,7 @@
 else
 {
     <div class="alert alert-info">
-    Aucun nouveau Abonnement
+    Aucun abonnement trouvé
 </div>
 
 }

@@ -14,7 +14,6 @@ class Abonnement
     public Autocar? voiture { get; set; }
 
     public Societe? soc { get; set; }
-    //public List<Utilisateur>? adheres { get; set; } = new();
 
 
 
