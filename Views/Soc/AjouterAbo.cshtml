@@ -104,7 +104,6 @@ else
             <th scope="col">Date debute</th>
             <th scope="col">Date fin</th>
             <th scope="col">Prix Dh/mois</th>
-            <th scope="col">Nombre adheres</th>
 
 
         </tr>
@@ -129,9 +128,6 @@ else
                             @a.prix DH
                         </td>
 
-                        <td>
-                            @(a.adheres?.ToArray().Length ?? 0)
-                        </td>
                     </tr>
                 }
             </tbody>

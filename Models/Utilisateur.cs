@@ -9,6 +9,7 @@ class Utilisateur
     public string? login { get; set; }
     public string? mdp { get; set; }
 
+    public List<Abonnement> adhere { get; set; } = new();
 
     public Utilisateur() { }
 

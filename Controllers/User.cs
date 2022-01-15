@@ -160,7 +160,7 @@ public class User : Controller
         {
             return RedirectToAction("Index", "Home");
         }
-        a!.adheres?.Add(User!);
+        User!.adhere.Add(a);
         DataBase.getCtxDb().SaveChanges();
         TempData["Success"] = "Abonnez Avec success";
         return RedirectToAction("Utilisateur", "Home");
@@ -176,11 +176,44 @@ public class User : Controller
 
         string? lo = HttpContext.Session.GetString("login");
         DataBase.getCtxDb().villes?.ToArray();
-        ViewBag.abos = DataBase.getCtxDb().abonnements?
-        .Where(a => a.adheres!.Any(u => u.login == lo))
-        .ToArray();
+        Utilisateur u = DataBase.getCtxDb().utilisateurs!.Where(x => x.login == lo).First();
+
+        ViewBag.abos = u.adhere.ToArray();
+
+        ViewBag.Success = TempData["Success"];
 
         return View();
+    }
+
+
+    public IActionResult Desabonner()
+    {
+
+        if (HttpContext.Session.GetString("type") != "user")
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        Utilisateur? User = DataBase.getCtxDb().utilisateurs?.Where(a => a.login == HttpContext.Session
+        .GetString("login")
+        ).FirstOrDefault();
+
+        string? aboId = HttpContext.Request.RouteValues["id"]?.ToString();
+
+
+        if (aboId == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        Abonnement? a = DataBase.getCtxDb().abonnements?.Where(a => a.ID == Int32.Parse(aboId!)).FirstOrDefault();
+
+        User!.adhere.Remove(a!);
+        TempData["Success"] = "Abonnement supprimer !";
+        return RedirectToAction("Abonnements", "User");
+
+
+
     }
 
 

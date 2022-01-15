@@ -32,6 +32,11 @@ public class Home : Controller
     {
         return View();
     }
+
+
+
+
+
     public IActionResult Utilisateur()
     {
         if (HttpContext.Session.GetInt32("logged") != 1)
@@ -40,9 +45,32 @@ public class Home : Controller
         }
 
         string? lo = HttpContext.Session.GetString("login");
-        DataBase.getCtxDb().villes?.ToArray();
+        ViewBag.cities = DataBase.getCtxDb().villes?.ToArray();
+        Utilisateur u = DataBase.getCtxDb().utilisateurs!.Where(x => x.login == lo).First();
         ViewBag.abos = DataBase.getCtxDb().abonnements?
-        .Where(a => a.adheres!.All(u => u.login != lo))
+        .Where(a => !u.adhere.Contains(a))
+        .ToArray();
+        ViewBag.Success = TempData["Success"];
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Utilisateur(int x = 0)
+    {
+        if (HttpContext.Session.GetInt32("logged") != 1)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        string? lo = HttpContext.Session.GetString("login");
+        Utilisateur u = DataBase.getCtxDb().utilisateurs!.Where(x => x.login == lo).First();
+        string vd = Request.Form["villedp"];
+        string va = Request.Form["villeda"];
+
+        ViewBag.cities = DataBase.getCtxDb().villes?.ToArray();
+        ViewBag.abos = DataBase.getCtxDb().abonnements?
+        .Where(a => !u.adhere.Contains(a))
+        .Where(a => a.villeDep!.nom == vd && a.villeDar!.nom == va)
         .ToArray();
         ViewBag.Success = TempData["Success"];
         return View();

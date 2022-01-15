@@ -6,6 +6,36 @@
 </div>
 }
 
+
+<form action="" method="POST" class="mb-5">
+    <div class="mb-3" style="width:50%;">
+        <label for="villedp">Ville depart : </label>
+
+        <select name="villedp">
+
+            @foreach (var v in ViewBag.cities)
+            {
+                <option value="@v.nom">@v.nom</option>
+            }
+
+        </select>
+    </div>
+    <div class="mb-3" style="width:50%;">
+        <label for="villeda">ville d arrete : </label>
+
+        <select name="villeda">
+
+            @foreach (var v in ViewBag.cities)
+            {
+                <option value="@v.nom">@v.nom</option>
+            }
+
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Rechercher</button>
+</form>
+
+
 @if (ViewBag.abos.Length > 0)
 {
 
@@ -21,6 +51,7 @@
             <th scope="col">Heure Depart</th>
             <th scope="col">Heure Darrivé</th>
             <th scope="col">Prix Dh/mois</th>
+            <th scope="col">Action</th>
 
 
 
@@ -31,7 +62,7 @@
             {
                 <tr>
                     <td>
-                        @a.villeDar?.nom
+                        @a.villeDep?.nom
                     </td>
                     <td>
                         @a.villeDar?.nom
@@ -52,7 +83,7 @@
                         @a.prix DH
                     </td>
                     <td>
-                        <a class="link-success" asp-controller="User" asp-action="Abonner" asp-route-id="@a.ID">Bonjour
+                        <a class="link-success" asp-controller="User" asp-action="Abonner" asp-route-id="@a.ID">
                             S'abonner</a>
                     </td>
 
@@ -61,4 +92,11 @@
             }
         </tbody>
     </table>
+}
+else
+{
+    <div class="alert alert-info">
+    Aucun nouveau Abonnement
+</div>
+
 }

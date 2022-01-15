@@ -1,4 +1,11 @@
-@if (ViewBag.abos != null)
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success">
+    @ViewBag.Success
+</div>
+}
+
+@if (ViewBag.abos.Length > 0)
 {
 
 
@@ -13,6 +20,7 @@
             <th scope="col">Heure Depart</th>
             <th scope="col">Heure Darrivé</th>
             <th scope="col">Prix Dh/mois</th>
+            <th scope="col">Action</th>
 
 
 
@@ -46,8 +54,7 @@
                     <td>
 
 
-                        <a class="link-danger" asp-controller="User" asp-action="Deabonner" asp-route-id="@a.ID">Bonjour
-                            S'abonner</a>
+                        <a class="link-danger" asp-controller="User" asp-action="Desabonner" asp-route-id="@a.ID">Désabonner</a>
                     </td>
 
 
