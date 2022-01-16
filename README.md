@@ -1,4 +1,4 @@
-to get the project up & runing via dotnet CLI : 
+to launch the app via dotnet CLI follow these steps : 
 
 1 - Make sure to have Sqlite Entity framework's driver 
 you can install it by running : dotnet add package Microsoft.EntityFrameworkCore.Sqlite
