@@ -218,5 +218,144 @@ public class User : Controller
 
     }
 
+    public IActionResult Voter()
+    {
 
+        if (HttpContext.Session.GetString("type") != "user")
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        Utilisateur? User = DataBase.getCtxDb().utilisateurs?.Where(a => a.login == HttpContext.Session
+        .GetString("login")
+        ).FirstOrDefault();
+
+        string? pId = HttpContext.Request.RouteValues["id"]?.ToString();
+
+
+        if (pId == null)
+        {
+            return RedirectToAction("Proposer", "User");
+        }
+
+
+        Proposition? p = DataBase.getCtxDb().propositions?.Where(pr => pr.ID == Int32.Parse(pId!)).FirstOrDefault();
+
+        Vote? v = DataBase.getCtxDb().votes?.Where(v => v.user == User! && v.proposition == p!).FirstOrDefault();
+
+        if (v == null)
+        {
+            p!.nbVote += 1;
+            Vote vt = new Vote(User!, p!);
+            DataBase.getCtxDb().votes?.Add(vt);
+            DataBase.getCtxDb().SaveChanges();
+            TempData["Success"] = "Vous Avez Voté pour " + p.villeDep + " - " + p.villeDar;
+
+        }
+        else
+        {
+            TempData["Error"] = "Vous avez déja voté";
+        }
+        return RedirectToAction("Proposer", "User");
+
+
+
+    }
+
+    public IActionResult Proposer()
+    {
+        if (HttpContext.Session.GetString("type") != "user")
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        Utilisateur? User = DataBase.getCtxDb().utilisateurs?.Where(a => a.login == HttpContext.Session
+        .GetString("login")
+        ).FirstOrDefault();
+
+
+        ViewBag.cities = DataBase.getCtxDb().villes?.ToArray();
+        ViewBag.props = DataBase.getCtxDb().propositions?.ToArray();
+
+        ViewBag.Success = TempData["Success"];
+        ViewBag.Error = TempData["Error"];
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Proposer(int x = 0)
+    {
+
+        if (HttpContext.Session.GetString("type") != "user")
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        Utilisateur? User = DataBase.getCtxDb().utilisateurs?.Where(a => a.login == HttpContext.Session
+        .GetString("login")
+        ).FirstOrDefault();
+
+        string vd = Request.Form["villedp"];
+        string va = Request.Form["villeda"];
+        string hd = Request.Form["hd"];
+        string ha = Request.Form["ha"];
+        Ville? villedp = DataBase.getCtxDb()
+        .villes?.Where(v => v.ID == int.Parse(vd)).FirstOrDefault();
+        Ville? villeda = DataBase.getCtxDb()
+        .villes?.Where(v => v.ID == int.Parse(va)).FirstOrDefault();
+
+        Proposition? p = DataBase.getCtxDb()
+        .propositions?.Where(pr => pr.villeDep!.nom == villedp!.nom
+        && pr.villeDar!.nom == villeda!.nom && pr.h_Dep == hd && pr.h_Arr == ha
+        ).FirstOrDefault();
+
+        if (p == null)
+        {
+            Proposition pr = new Proposition(hd, ha, villedp!, villeda!);
+            DataBase.getCtxDb().Add(pr);
+            Vote v = new Vote(User!, pr);
+            DataBase.getCtxDb().Add(v);
+            DataBase.getCtxDb().SaveChanges();
+
+        }
+        else
+        {
+
+            Vote? v = DataBase.getCtxDb().votes?.Where(x =>
+            x.user == User! && x.proposition == p!).FirstOrDefault();
+
+            if (v == null)
+            {
+                p.nbVote += 1;
+                Vote vt = new Vote(User!, p);
+                DataBase.getCtxDb().Add(vt);
+                DataBase.getCtxDb().SaveChanges();
+            }
+
+            else
+            {
+                TempData["Error"] = "Vous avez déja voté";
+                return RedirectToAction("Proposer", "User");
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        ViewBag.cities = DataBase.getCtxDb().villes?.ToArray();
+
+
+        TempData["Success"] = "Proposition Ajouté";
+
+        return RedirectToAction("Proposer", "User");
+
+    }
 }

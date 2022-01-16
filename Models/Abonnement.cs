@@ -6,7 +6,6 @@ class Abonnement
     public string? h_Dep { get; set; }
     public string? h_Arr { get; set; }
     public decimal? prix { get; set; }
-    public string? type { get; set; }
 
     public Ville? villeDep { get; set; }
     public Ville? villeDar { get; set; }

@@ -8,6 +8,9 @@ class DataBase : DbContext
     public DbSet<Ville>? villes { get; set; }
     public DbSet<Abonnement>? abonnements { get; set; }
 
+    public DbSet<Proposition>? propositions { get; set; }
+
+    public DbSet<Vote>? votes { get; set; }
     public string DataPath { get; }
 
     static DataBase? DbConsumer = null;
