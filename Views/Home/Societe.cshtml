@@ -1,3 +1,42 @@
-<h1>
-    Bonjor societer
-</h1>
+@if (ViewBag.props != null)
+{
+
+    <h3 class="mt-5 display-5"> Propositions des Clients : </h3>
+
+    <table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Ville depart</th>
+            <th scope="col">Ville darrive </th>
+            <th scope="col">Heure Depart</th>
+            <th scope="col">Heure Darrivé</th>
+            <th scope="col">Nombre des interessé</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Proposition p in ViewBag.props)
+            {
+                <tr>
+                    <td>
+                        @p.villeDep?.nom
+                    </td>
+                    <td>
+                        @p.villeDar?.nom
+                    </td>
+                    <td>
+                        @p.h_Dep
+                    </td>
+                    <td>
+                        @p.h_Arr
+                    </td>
+                    <td>
+                        @p.nbVote
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}

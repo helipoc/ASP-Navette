@@ -102,7 +102,7 @@
                         
                            string? lo = ss?.GetString("login");
                            Vote? v = DataBase.getCtxDb()
-                           .votes?.Where(t => t.proposition == p && t.user.login==lo).FirstOrDefault();
+                           .votes?.Where(t => t.proposition! == p && t.user!.login==lo).FirstOrDefault();
                         
                         }
                         @if(v==null) {

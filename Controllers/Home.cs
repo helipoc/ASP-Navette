@@ -30,6 +30,8 @@ public class Home : Controller
 
     public IActionResult Societe()
     {
+        DataBase.getCtxDb().villes?.ToArray();
+        ViewBag.props = DataBase.getCtxDb().propositions?.ToArray();
         return View();
     }
 
