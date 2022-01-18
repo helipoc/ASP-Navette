@@ -1,0 +1,73 @@
+@if (ViewBag.voitures.Length == 0)
+{
+    <div class="alert alert-danger">
+    veillez Ajouter une voiture !
+</div>
+}
+
+else
+{
+
+
+    <form action="" method="POST">
+
+    <div class="mt-5 mb-3" style="width:50%;">
+        <label for="autocar">Selectionner une de vos voiture : </label>
+
+        <select name="autocar">
+
+            @foreach (var v in ViewBag.voitures)
+                {
+                    <option value="@v.ID">@v.modele</option>
+                }
+
+            </select>
+        </div>
+        <div class="mb-3" style="width:50%;">
+            <label for="villedp">Ville depart : </label>
+
+            <input name="villedp" value="@ViewBag.vd" disabled>
+
+        </div>
+        <div class="mb-3" style="width:50%;">
+            <label for="villeda">ville d arrete : </label>
+
+            <input name="villeda" value="@ViewBag.va" disabled>
+
+        </div>
+        <div class="mb-3" style="width:10%;">
+            <label for="start">Date début :</label>
+
+            <input type="date" name="d_debut" min='@DateTime.Today.ToString("yyyy-MM-dd")'>
+        </div>
+        <div class="mb-3" style="width:10%;">
+            <label for="start">Start date fin:</label>
+
+            <input type="date" name="d_fin" min='@DateTime.Today.AddDays(30).ToString("yyyy-MM-dd")'>
+        </div>
+
+        <div class="mb-3" style="width:10%;">
+            <label for="start">Heure Depart (hh:mm) :</label>
+
+            <input type="string" name="hd" value="@ViewBag.hd" style="width:90%;" disabled>
+        </div>
+        <div class="mb-3" style="width:10%;">
+            <label for="start">Heure arrivé (hh:mm) :</label>
+
+            <input type="string" name="ha" style="width:90%;" value="@ViewBag.ha" disabled>
+        </div>
+        <div class=" mb-3" style="width:10%;">
+            <label for="start">Prix mensuel :</label>
+            <input name="pid" value="@ViewBag.pid" hidden>
+            <input name="prix" style="width:90%;">
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-success">Ajouter</button>
+
+
+    </form>
+
+}

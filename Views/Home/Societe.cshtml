@@ -1,4 +1,10 @@
-@if (ViewBag.props != null)
+@if(ViewBag.Success != null) {
+    <div class="alert alert-success">
+        @ViewBag.Success
+    </div>
+}
+
+@if (ViewBag.props != null && ViewBag.props.Length > 0)
 {
 
     <h3 class="mt-5 display-5"> Propositions des Clients : </h3>
@@ -11,6 +17,7 @@
             <th scope="col">Heure Depart</th>
             <th scope="col">Heure Darrivé</th>
             <th scope="col">Nombre des interessé</th>
+            <th scope="col">Action</th>
 
         </tr>
     </thead>
@@ -33,10 +40,19 @@
                     <td>
                         @p.nbVote
                     </td>
+                    <td>
+                        <a class="link-success" asp-controller="Soc" asp-action="prendEnCharge"
+                    asp-route-id="@p.ID">Prend En Charge</a>
+
+                    </td>
 
 
                 </tr>
             }
         </tbody>
     </table>
+}else {
+    <div class="alert alert-warning">
+        Aucun nouveau Proposition !
+    </div>
 }

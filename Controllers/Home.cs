@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 
 namespace ASP.Controllers;
@@ -30,7 +29,13 @@ public class Home : Controller
 
     public IActionResult Societe()
     {
+        if (HttpContext.Session.GetString("type") != "soc")
+        {
+
+            return RedirectToAction("Login", "User");
+        }
         DataBase.getCtxDb().villes?.ToArray();
+        ViewBag.Success = TempData["Success"];
         ViewBag.props = DataBase.getCtxDb().propositions?.ToArray();
         return View();
     }

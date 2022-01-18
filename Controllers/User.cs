@@ -248,7 +248,7 @@ public class User : Controller
             Vote vt = new Vote(User!, p!);
             DataBase.getCtxDb().votes?.Add(vt);
             DataBase.getCtxDb().SaveChanges();
-            TempData["Success"] = "Vous Avez Voté pour " + p.villeDep + " - " + p.villeDar;
+            TempData["Success"] = "Vous Avez Voté pour " + p.villeDep!.nom + " - " + p.villeDar!.nom;
 
         }
         else
