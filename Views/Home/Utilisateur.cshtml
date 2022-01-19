@@ -86,9 +86,21 @@
                     <td>
                         @a.prix DH
                     </td>
+
+
                     <td>
-                        <a class="link-success" asp-controller="User" asp-action="Abonner" asp-route-id="@a.ID">
-                            S'abonner</a>
+                        @{
+                            if (a.d_Fin <= DateTime.Now)
+                            {
+                                <a class="link-danger" href="#">Expiré</a>
+                            }
+                            else
+                            {
+                                <a class="link-success" asp-controller="User" asp-action="Abonner" asp-route-id="@a.ID">
+                                    S'abonner</a>
+                            }
+                        }
+
                     </td>
 
 

@@ -158,6 +158,10 @@ public class User : Controller
         {
             return RedirectToAction("Index", "Home");
         }
+        if (a.d_Fin <= DateTime.Now)
+        {
+            return RedirectToAction("Index", "Home");
+        }
         if (User!.adhere.Contains(a))
         {
             return RedirectToAction("Index", "Home");

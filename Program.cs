@@ -15,9 +15,9 @@ builder.Services.AddSession(options =>
 builder.Services.AddHttpContextAccessor();
 
 int? count = DataBase.getCtxDb().villes?.Count();
-/*var all = from c in DataBase.getCtxDb().villes select c;
-DataBase.getCtxDb().villes?.RemoveRange(all);
-DataBase.getCtxDb().SaveChanges();*/
+
+
+
 
 if (count == 0)
 {
