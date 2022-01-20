@@ -1,4 +1,6 @@
-to launch the app via dotnet CLI follow these steps : 
+by - Mouhcine Zahouani & Youssef Lamaarti -
+
+To launch the app via dotnet CLI follow these steps : 
 
 1 - Make sure to have Sqlite Entity framework's driver 
 you can install it by running : dotnet add package Microsoft.EntityFrameworkCore.Sqlite
