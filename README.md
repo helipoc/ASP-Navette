@@ -1,4 +1,3 @@
-by - Mouhcine Zahouani & Youssef Lamaarti -
 
 To launch the app via dotnet CLI follow these steps : 
 
